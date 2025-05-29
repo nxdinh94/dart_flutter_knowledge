@@ -131,11 +131,12 @@ The result of `Isolate.run()` is always a **Future**, because code in the main i
 
 ## Sending multiple messages between isolates with ports
 ### `ReceivePort` and `SendPort`
-Setting up long-lived communication between isolates requires two classes (in addition to `Isolate`): `ReceivePort` and `SendPort`. These ports are the only way isolates can communicate with each other.
+- Setting up long-lived communication between isolates requires two classes (in addition to `Isolate`): `ReceivePort` and `SendPort`. These ports are the only way isolates can communicate with each other.
+- A `SendPort` object is associated with exactly one `ReceivePort`, but a single `ReceivePort` can have many `SendPorts`. When you create a `ReceivePort`, it creates a `SendPort` for itself. You can create additional `SendPorts` that can send messages to an existing `ReceivePort`.
+- A `ReceivePort` is an object that handles messages that are sent from other isolates. Those messages are sent via a `SendPort`.
 
->[NOTE]
->A `SendPort` object is associated with exactly one `ReceivePort`, but a single `ReceivePort` can have many `SendPorts`. When you create a `ReceivePort`, it creates a `SendPort` for itself. You can create additional `SendPorts` that can send messages to an existing `ReceivePort`.
-
+>[!NOTE]
+>A `SendPort` object is associated with exactly one `ReceivePort`, but a single ReceivePort can have many `SendPorts`. When you create a `ReceivePort`, it creates a `SendPort` for itself. You can create additional `SendPorts` that can send messages to an existing `ReceivePort`.
 ### Setting up ports
 
 
