@@ -42,7 +42,6 @@ Stream<String> getUserName() async* {
 
 >[!INFO]
 >Here yield returns the value from the stream. To use yield you have to use `async*`.
-
 ## How To Use Stream In Dart
 You can use stream in dart by using `await for` loop.
 
