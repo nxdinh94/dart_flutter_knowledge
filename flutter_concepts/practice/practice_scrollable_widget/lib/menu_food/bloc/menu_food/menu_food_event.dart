@@ -10,4 +10,9 @@ class MenuFoodGetAllEvent extends MenuFoodEvent {
   const MenuFoodGetAllEvent();
 }
 
+class MenuFoodDeleteEvent extends MenuFoodEvent {
+  const MenuFoodDeleteEvent(this.foodId);
+  final String foodId;
+}
+
 

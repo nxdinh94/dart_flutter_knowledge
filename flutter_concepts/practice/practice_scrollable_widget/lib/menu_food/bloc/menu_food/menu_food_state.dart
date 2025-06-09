@@ -7,20 +7,21 @@ sealed class MenuFoodState {
   final List<FoodModel>? menuFoods;
 }
 
-class MenuFoodInitial extends MenuFoodState {
-  const MenuFoodInitial() : super();
-}
-
 class MenuFoodLoading extends MenuFoodState {
   const MenuFoodLoading() : super();
 }
 
 class MenuFoodLoadSuccess extends MenuFoodState {
   const MenuFoodLoadSuccess(List<FoodModel> menuFoods)
-      : super(menuFoods: menuFoods);
+    : super(menuFoods: menuFoods);
+}
+
+class MenuFoodDeleteSuccess extends MenuFoodState {
+  const MenuFoodDeleteSuccess(List<FoodModel> menuFoods)
+    : super(menuFoods: menuFoods);
 }
 
 class MenuFoodLoadFailure extends MenuFoodState {
   MenuFoodLoadFailure(String error)
-      : super(error: Exception(error));
+    : super(error: Exception(error));
 }

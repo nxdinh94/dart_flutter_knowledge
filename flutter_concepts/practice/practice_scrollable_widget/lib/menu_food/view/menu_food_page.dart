@@ -37,32 +37,48 @@ class _MenuFoodPageState extends State<MenuFoodPage> {
           ),
         ],
       ),
-      body: BlocBuilder<MenuFoodBloc, MenuFoodState>(
+      body: BlocConsumer<MenuFoodBloc, MenuFoodState>(
         builder: (context, state) {
-          if (state is MenuFoodLoading) {
+          if (state is MenuFoodLoading ) {
             return const Center(child: CircularProgressIndicator());
           }
           else if (state is MenuFoodLoadFailure) {
             return Center(child: Text(state.error.toString()));
           }
-          else if (state is MenuFoodLoadSuccess) {
+          else if (state is MenuFoodLoadSuccess || state is MenuFoodDeleteSuccess) {
             final menuFoods = state.menuFoods;
             if (menuFoods == null || menuFoods.isEmpty) {
               return const Center(child: Text('No menu food available'));
             }
-            final foodItems = menuFoods.map((e) => FoodItemWidget(food: e)).toList();
-            if (isGrid) {
-              return GridView.count(
-                crossAxisCount: 2,
+            final foodItems = menuFoods
+                .where((e) => !e.isDeleted)
+                .map((e) => FoodItemWidget(food: e))
+                .toList();
+
+            if(foodItems.isEmpty) {
+              return const Center(child: Text('No menu food available'));
+            }else{
+              if (isGrid) {
+                return GridView.count(
+                  crossAxisCount: 2,
+                  children: foodItems,
+                );
+              }
+              return ListView(
                 children: foodItems,
               );
             }
-            return ListView(
-              children: foodItems,
-            );
+
           }
           // Có thể thêm trường hợp khởi tạo hoặc fallback
           return const SizedBox.shrink();
+        },
+        listener: (BuildContext context, MenuFoodState state) {
+          if (state is MenuFoodDeleteSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('Deleted food: ${state.menuFoods?.first.name}')),
+            );
+          }
         },
       ),
     );

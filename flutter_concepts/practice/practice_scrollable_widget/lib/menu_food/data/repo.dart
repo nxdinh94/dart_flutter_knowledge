@@ -9,15 +9,19 @@ class Repo {
       final rawData = await _dataSource.getAllFood();
 
       final transformed = rawData
-          .whereType<Map<String, dynamic>>()
-          .map((e) {
-        final fm = FoodModel.fromJson(e);
-        return fm;
-      })
-          .toList();
-
-      print('Fetched ${transformed.length} food items');
+        .whereType<Map<String, dynamic>>()
+        .map(FoodModel.fromJson).toList();
       return transformed;
+    }
+    catch (e) {
+      print('Repo Error: $e');
+      rethrow;
+    }
+  }
+  Future<FoodModel> deleteFood(String id) async {
+    try {
+      final rawData = await _dataSource.deleteFood(id);
+      return FoodModel.fromJson(rawData as Map<String, dynamic>);
     } catch (e) {
       print('Repo Error: $e');
       rethrow;

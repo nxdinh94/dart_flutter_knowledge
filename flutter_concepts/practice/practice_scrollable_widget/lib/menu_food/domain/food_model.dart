@@ -2,6 +2,8 @@ class FoodModel {
   FoodModel({
     required this.id,
     required this.name,
+    required this.image,
+    required this.isDeleted,
     this.ingredients,
     this.instructions,
     this.prepTimeMinutes,
@@ -15,7 +17,8 @@ class FoodModel {
     this.rating,
     this.reviewCount,
     this.mealTypes,
-    required this.image,
+
+    this.deletedOn,
   });
 
   final int id;
@@ -34,6 +37,8 @@ class FoodModel {
   final int? reviewCount;
   final List<String>? mealTypes;
   final String image;
+  final bool isDeleted;
+  final DateTime? deletedOn;
 
   factory FoodModel.fromJson(Map<String, dynamic> json) {
     return FoodModel(
@@ -59,8 +64,54 @@ class FoodModel {
           ? List<String>.from(json['mealTypes'] as List)
           : null,
       image: json['image'] as String,
+      isDeleted: json['isDeleted'] as bool? ?? false,
+      deletedOn: json['deletedOn'] != null
+          ? DateTime.parse(json['deletedOn'] as String)
+          : null,
     );
   }
+  FoodModel copyWith({
+    int? id,
+    String? name,
+    List<String>? ingredients,
+    List<String>? instructions,
+    int? prepTimeMinutes,
+    int? cookTimeMinutes,
+    int? servings,
+    String? difficulty,
+    String? cuisine,
+    int? caloriesPerServing,
+    List<String>? tags,
+    int? userId,
+    double? rating,
+    int? reviewCount,
+    List<String>? mealTypes,
+    String? image,
+    bool? isDeleted,
+    DateTime? deletedOn,
+  }) {
+    return FoodModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      ingredients: ingredients ?? this.ingredients,
+      instructions: instructions ?? this.instructions,
+      prepTimeMinutes: prepTimeMinutes ?? this.prepTimeMinutes,
+      cookTimeMinutes: cookTimeMinutes ?? this.cookTimeMinutes,
+      servings: servings ?? this.servings,
+      difficulty: difficulty ?? this.difficulty,
+      cuisine: cuisine ?? this.cuisine,
+      caloriesPerServing: caloriesPerServing ?? this.caloriesPerServing,
+      tags: tags ?? this.tags,
+      userId: userId ?? this.userId,
+      rating: rating ?? this.rating,
+      reviewCount: reviewCount ?? this.reviewCount,
+      mealTypes: mealTypes ?? this.mealTypes,
+      image: image ?? this.image,
+      isDeleted: isDeleted ?? this.isDeleted,
+      deletedOn: deletedOn ?? this.deletedOn,
+    );
+  }
+
 
 
   Map<String, dynamic> toJson() {
