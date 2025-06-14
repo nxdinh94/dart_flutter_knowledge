@@ -1,44 +1,28 @@
-class FoodModel {
-  FoodModel({
-    required this.id,
-    required this.name,
-    required this.image,
-    required this.isDeleted,
-    this.ingredients,
-    this.instructions,
-    this.prepTimeMinutes,
-    this.cookTimeMinutes,
-    this.servings,
-    this.difficulty,
-    this.cuisine,
-    this.caloriesPerServing,
-    this.tags,
-    this.userId,
-    this.rating,
-    this.reviewCount,
-    this.mealTypes,
+import 'package:json_annotation/json_annotation.dart';
+import 'package:practice_scrollable_widget/menu_food/domain/entity/food_entity.dart';
 
-    this.deletedOn,
+@JsonSerializable()
+class FoodModel extends FoodEntity {
+  const FoodModel({
+    required super.id,
+    required super.name,
+    required super.image,
+    required super.isDeleted,
+    super.ingredients,
+    super.instructions,
+    super.prepTimeMinutes,
+    super.cookTimeMinutes,
+    super.servings,
+    super.difficulty,
+    super.cuisine,
+    super.caloriesPerServing,
+    super.tags,
+    super.userId,
+    super.rating,
+    super.reviewCount,
+    super.mealTypes,
+    super.deletedOn,
   });
-
-  final int id;
-  final String name;
-  final List<String>? ingredients;
-  final List<String>? instructions;
-  final int? prepTimeMinutes;
-  final int? cookTimeMinutes;
-  final int? servings;
-  final String? difficulty;
-  final String? cuisine;
-  final int? caloriesPerServing;
-  final List<String>? tags;
-  final int? userId;
-  final double? rating;
-  final int? reviewCount;
-  final List<String>? mealTypes;
-  final String image;
-  final bool isDeleted;
-  final DateTime? deletedOn;
 
   factory FoodModel.fromJson(Map<String, dynamic> json) {
     return FoodModel(
@@ -56,9 +40,13 @@ class FoodModel {
       difficulty: json['difficulty'] as String?,
       cuisine: json['cuisine'] as String?,
       caloriesPerServing: json['caloriesPerServing'] as int?,
-      tags: (json['tags'] is List) ? List<String>.from(json['tags'] as List) : null,
+      tags: (json['tags'] is List)
+          ? List<String>.from(json['tags'] as List)
+          : null,
       userId: json['userId'] as int?,
-      rating: json['rating'] != null ? (json['rating'] as num).toDouble() : null,
+      rating: json['rating'] != null
+          ? (json['rating'] as num).toDouble()
+          : null,
       reviewCount: json['reviewCount'] as int?,
       mealTypes: (json['mealTypes'] is List)
           ? List<String>.from(json['mealTypes'] as List)
@@ -70,6 +58,7 @@ class FoodModel {
           : null,
     );
   }
+
   FoodModel copyWith({
     int? id,
     String? name,
@@ -112,8 +101,6 @@ class FoodModel {
     );
   }
 
-
-
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -132,6 +119,8 @@ class FoodModel {
       'reviewCount': reviewCount,
       'mealTypes': mealTypes,
       'image': image,
+      'isDeleted': isDeleted,
+      'deletedOn': deletedOn?.toIso8601String(),
     };
   }
 }

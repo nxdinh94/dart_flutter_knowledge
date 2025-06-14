@@ -1,18 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practice_scrollable_widget/app/app.dart';
+import 'package:practice_scrollable_widget/app/injection.dart';
 import 'package:practice_scrollable_widget/bootstrap.dart';
-import 'package:practice_scrollable_widget/menu_food/bloc/switch_layout/switch_layout_bloc.dart';
-import 'package:practice_scrollable_widget/menu_food/menu_food.dart';
+import 'package:practice_scrollable_widget/menu_food/presentation/food_presentation.dart';
 
-void main() {
-  bootstrap((){
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupInjection();
+  await bootstrap((){
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => MenuFoodBloc()..add(const MenuFoodGetAllEvent()),
+          create: (context) => getIt<MenuFoodBloc>()..add(const MenuFoodGetAllEvent()),
         ),
         BlocProvider(
-          create: (context) => SwitchLayoutBloc(),
+          create: (context) => getIt<SwitchLayoutBloc>(),
         ),
       ],
       child: const App(),

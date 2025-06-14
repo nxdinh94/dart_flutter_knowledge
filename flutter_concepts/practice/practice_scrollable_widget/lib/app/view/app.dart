@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practice_scrollable_widget/l10n/arb/app_localizations.dart';
-import 'package:practice_scrollable_widget/menu_food/menu_food.dart';
+import 'package:practice_scrollable_widget/menu_food/presentation/view/menu_food_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
