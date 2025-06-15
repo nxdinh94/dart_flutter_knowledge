@@ -16,38 +16,37 @@ class MenuFoodBloc extends Bloc<MenuFoodEvent, MenuFoodState> {
     MenuFoodGetAllEvent event,
     Emitter<MenuFoodState> emit,
   ) async {
-      final result = await getAllFoodUseCase();
-      if(result is DataSuccess && result.data!.isNotEmpty){
-        emit(MenuFoodLoadSuccess(result.data!));
-      }
-      if(result is DataError){
-        emit(MenuFoodLoadFailure(result.exception!));
-      }
+    final result = await getAllFoodUseCase();
+    if (result is DataSuccess && result.data!.isNotEmpty) {
+      emit(MenuFoodLoadSuccess(result.data!));
+    }
+    if (result is DataError) {
+      emit(MenuFoodLoadFailure(result.exception!));
+    }
   }
   Future<void> _onMenuFoodDeleteEvent(
     MenuFoodDeleteEvent event,
     Emitter<MenuFoodState> emit,
   ) async {
-      final result = await deleteFoodUseCase(params: event.foodId);
-      if(result is DataSuccess){
-        final data = result.data!;
-        final foundIndex = state.menuFoods!.indexWhere((food) => food.id == data.id);
-        final newState = <FoodEntity>[];
-        state.menuFoods!.asMap().forEach((index, value){
+    final result = await deleteFoodUseCase(params: event.foodId);
+    if (result is DataSuccess) {
+      final data = result.data!;
+      final foundIndex = state.menuFoods!.indexWhere((food) => food.id == data.id);
+      final newState = <FoodEntity>[];
+      state.menuFoods!.asMap().forEach((index, value) {
           if (index == foundIndex) {
             newState.add(data);
-          }else {
+          }
+          else {
             newState.add(value);
           }
-        });
-        emit(MenuFoodDeleteSuccess(newState));
-      }
-      if(result is DataError){
-        emit(MenuFoodLoadFailure(result.exception!));
-      }
-
-
-
+        }
+      );
+      emit(MenuFoodDeleteSuccess(newState));
+    }
+    if (result is DataError) {
+      emit(MenuFoodLoadFailure(result.exception!));
+    }
   }
 }
 
