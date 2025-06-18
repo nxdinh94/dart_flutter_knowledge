@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:practice_scrollable_widget/menu_food/domain/entity/food_entity.dart';
 import 'package:practice_scrollable_widget/menu_food/presentation/food_presentation.dart';
 class MenuFoodPage extends StatefulWidget {
   const MenuFoodPage({super.key});
@@ -36,6 +37,7 @@ class _MenuFoodPageState extends State<MenuFoodPage> {
       ),
       body: BlocConsumer<MenuFoodBloc, MenuFoodState>(
         builder: (context, state) {
+
           if (state is MenuFoodLoading) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -43,8 +45,8 @@ class _MenuFoodPageState extends State<MenuFoodPage> {
             return Center(child: Text(state.error.toString()));
           }
           else if (state is MenuFoodLoadSuccess || state is MenuFoodDeleteSuccess) {
-            final menuFoods = state.menuFoods;
-            if (menuFoods == null || menuFoods.isEmpty) {
+            final menuFoods = (state as dynamic).menuFoods as List<FoodEntity>;
+            if (menuFoods.isEmpty) {
               return const Center(child: Text('No menu food available'));
             }
             final foodItems = menuFoods
@@ -66,7 +68,6 @@ class _MenuFoodPageState extends State<MenuFoodPage> {
                 children: foodItems,
               );
             }
-
           }
           // Có thể thêm trường hợp khởi tạo hoặc fallback
           return const SizedBox.shrink();
@@ -74,7 +75,7 @@ class _MenuFoodPageState extends State<MenuFoodPage> {
         listener: (BuildContext context, MenuFoodState state) {
           if (state is MenuFoodDeleteSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Deleted food: ${state.menuFoods?.first.name}')),
+              SnackBar(content: Text('Deleted food: ${state.menuFoods.first.name}')),
             );
           }
         },

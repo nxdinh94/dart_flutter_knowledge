@@ -1,18 +1,11 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-sealed class MenuFoodEvent {
-  const MenuFoodEvent();
-}
+part 'menu_food_event.freezed.dart';
 
-class MenuFoodLoadEvent extends MenuFoodEvent {
-  const MenuFoodLoadEvent();
+@freezed
+class MenuFoodEvent with _$MenuFoodEvent {
+  const factory MenuFoodEvent.load() = MenuFoodLoadEvent;
+  const factory MenuFoodEvent.getAll() = MenuFoodGetAllEvent;
+  const factory MenuFoodEvent.delete(String foodId) = MenuFoodDeleteEvent;
 }
-class MenuFoodGetAllEvent extends MenuFoodEvent {
-  const MenuFoodGetAllEvent();
-}
-
-class MenuFoodDeleteEvent extends MenuFoodEvent {
-  const MenuFoodDeleteEvent(this.foodId);
-  final String foodId;
-}
-
 

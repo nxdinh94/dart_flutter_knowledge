@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:practice_scrollable_widget/core/data_state.dart';
 import 'package:practice_scrollable_widget/menu_food/data/food_data.dart';
+import 'package:practice_scrollable_widget/menu_food/data/mapper/food_mapper.dart';
 import 'package:practice_scrollable_widget/menu_food/domain/food_domain.dart';
 
 class FoodRepositoryImp extends FoodRepository{
@@ -14,7 +15,8 @@ class FoodRepositoryImp extends FoodRepository{
     try {
       final rawData = await foodRestApi.deleteFood(id);
       if(rawData.response.statusCode == HttpStatus.ok){
-        return DataSuccess(rawData.data);
+        final foodEntity = rawData.data.toEntity();
+        return DataSuccess(foodEntity);
       }else {
         return DataError(
           DioException(
@@ -44,7 +46,8 @@ class FoodRepositoryImp extends FoodRepository{
         final transformed = foods
           .whereType<Map<String, dynamic>>()
           .map(FoodModel.fromJson).toList();
-        return DataSuccess<List<FoodModel>>(transformed);
+        final foodEntities = transformed.map((e) => e.toEntity()).toList();
+        return DataSuccess<List<FoodEntity>>(foodEntities);
       }
       else {
         return DataError(

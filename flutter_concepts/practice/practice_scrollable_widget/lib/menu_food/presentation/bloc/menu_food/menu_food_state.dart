@@ -1,29 +1,20 @@
 import 'package:dio/dio.dart';
-import 'package:practice_scrollable_widget/menu_food/data/model/food_model.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:practice_scrollable_widget/menu_food/domain/entity/food_entity.dart';
 
-sealed class MenuFoodState {
-  const MenuFoodState({this.error, this.menuFoods});
+part 'menu_food_state.freezed.dart';
 
-  final DioException? error;
-  final List<FoodEntity>? menuFoods;
-}
 
-class MenuFoodLoading extends MenuFoodState {
-  const MenuFoodLoading() : super();
-}
+@freezed
+class MenuFoodState with _$MenuFoodState {
+  const factory MenuFoodState.loading() = MenuFoodLoading;
 
-class MenuFoodLoadSuccess extends MenuFoodState {
-  const MenuFoodLoadSuccess(List<FoodEntity> menuFoods)
-    : super(menuFoods: menuFoods);
-}
+  const factory MenuFoodState.loadSuccess(List<FoodEntity> menuFoods) =
+    MenuFoodLoadSuccess;
 
-class MenuFoodDeleteSuccess extends MenuFoodState {
-  const MenuFoodDeleteSuccess(List<FoodEntity> menuFoods)
-    : super(menuFoods: menuFoods);
-}
+  const factory MenuFoodState.deleteSuccess(List<FoodEntity> menuFoods) =
+    MenuFoodDeleteSuccess;
 
-class MenuFoodLoadFailure extends MenuFoodState {
-  MenuFoodLoadFailure(DioException error)
-    : super(error: error);
+  const factory MenuFoodState.loadFailure(DioException error) =
+      MenuFoodLoadFailure;
 }

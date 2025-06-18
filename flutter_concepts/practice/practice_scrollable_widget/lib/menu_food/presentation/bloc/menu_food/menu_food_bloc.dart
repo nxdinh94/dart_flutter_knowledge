@@ -31,18 +31,17 @@ class MenuFoodBloc extends Bloc<MenuFoodEvent, MenuFoodState> {
     final result = await deleteFoodUseCase(params: event.foodId);
     if (result is DataSuccess) {
       final data = result.data!;
-      final foundIndex = state.menuFoods!.indexWhere((food) => food.id == data.id);
-      final newState = <FoodEntity>[];
-      state.menuFoods!.asMap().forEach((index, value) {
-          if (index == foundIndex) {
-            newState.add(data);
-          }
-          else {
-            newState.add(value);
-          }
-        }
-      );
-      emit(MenuFoodDeleteSuccess(newState));
+
+      if (state is MenuFoodLoadSuccess || state is MenuFoodDeleteSuccess) {
+        final currentFoods = (state as dynamic).menuFoods as List<FoodEntity>;
+
+        final foundIndex = currentFoods.indexWhere((food) => food.id == data.id);
+
+        final newState = [...currentFoods];
+        newState[foundIndex] = data;
+
+        emit(MenuFoodDeleteSuccess(newState));
+      }
     }
     if (result is DataError) {
       emit(MenuFoodLoadFailure(result.exception!));
