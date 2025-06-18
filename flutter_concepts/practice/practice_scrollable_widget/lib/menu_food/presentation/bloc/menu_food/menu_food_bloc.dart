@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:practice_scrollable_widget/core/data_state.dart';
+import 'package:injectable/injectable.dart';
+import 'package:practice_scrollable_widget/core/core.dart';
 import 'package:practice_scrollable_widget/menu_food/domain/food_domain.dart';
 import 'package:practice_scrollable_widget/menu_food/presentation/food_presentation.dart';
 
+@singleton
 class MenuFoodBloc extends Bloc<MenuFoodEvent, MenuFoodState> {
   MenuFoodBloc(this.getAllFoodUseCase, this.deleteFoodUseCase) : super(const MenuFoodLoading()) {
     on<MenuFoodGetAllEvent>(_onMenuFoodGetAllEvent);

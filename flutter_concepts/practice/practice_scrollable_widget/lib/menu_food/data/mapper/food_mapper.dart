@@ -1,5 +1,5 @@
-import 'package:practice_scrollable_widget/menu_food/domain/entity/food_entity.dart';
-import '../model/food_model.dart';
+import 'package:practice_scrollable_widget/menu_food/data/food_data.dart';
+import 'package:practice_scrollable_widget/menu_food/domain/food_domain.dart';
 
 extension FoodEntityMapper on FoodModel {
   FoodEntity toEntity() {

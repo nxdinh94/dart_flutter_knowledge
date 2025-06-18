@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:practice_scrollable_widget/menu_food/domain/entity/food_entity.dart';
+import 'package:practice_scrollable_widget/menu_food/domain/food_domain.dart';
 import 'package:practice_scrollable_widget/menu_food/presentation/food_presentation.dart';
 class MenuFoodPage extends StatefulWidget {
   const MenuFoodPage({super.key});
@@ -37,7 +37,6 @@ class _MenuFoodPageState extends State<MenuFoodPage> {
       ),
       body: BlocConsumer<MenuFoodBloc, MenuFoodState>(
         builder: (context, state) {
-
           if (state is MenuFoodLoading) {
             return const Center(child: CircularProgressIndicator());
           }

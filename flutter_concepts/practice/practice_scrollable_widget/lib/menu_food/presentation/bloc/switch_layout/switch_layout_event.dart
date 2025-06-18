@@ -1,11 +1,9 @@
-sealed class SwitchLayoutEvent {
-  const SwitchLayoutEvent();
-}
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class SwitchLayoutToGridEvent extends SwitchLayoutEvent {
-  const SwitchLayoutToGridEvent();
-}
+part 'switch_layout_event.freezed.dart';
 
-class SwitchLayoutToListEvent extends SwitchLayoutEvent {
-  const SwitchLayoutToListEvent();
+@freezed
+class SwitchLayoutEvent with _$SwitchLayoutEvent {
+  const factory SwitchLayoutEvent.toGrid() = SwitchLayoutToGridEvent;
+  const factory SwitchLayoutEvent.toList() = SwitchLayoutToListEvent;
 }

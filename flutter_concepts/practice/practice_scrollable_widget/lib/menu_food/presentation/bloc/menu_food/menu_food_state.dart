@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:practice_scrollable_widget/menu_food/domain/entity/food_entity.dart';
-
+import 'package:practice_scrollable_widget/menu_food/domain/food_domain.dart';
 part 'menu_food_state.freezed.dart';
 
 

@@ -1,3 +1,4 @@
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'menu_food_event.freezed.dart';
