@@ -16,7 +16,6 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import '../../menu_food/data/food_data.dart' as _i82;
 import '../../menu_food/data/repository/food_repository_imp.dart' as _i84;
-import '../../menu_food/domain/entity/food_entity.dart' as _i782;
 import '../../menu_food/domain/food_domain.dart' as _i909;
 import '../../menu_food/domain/useCase/delete_food_use_case.dart' as _i920;
 import '../../menu_food/domain/useCase/get_all_food_use_case.dart' as _i42;
@@ -24,6 +23,8 @@ import '../../menu_food/presentation/bloc/menu_food/menu_food_bloc.dart'
     as _i50;
 import '../../menu_food/presentation/bloc/switch_layout/switch_layout_bloc.dart'
     as _i790;
+import '../app.dart' as _i503;
+import '../interceptor/interceptor.dart' as _i769;
 import 'get_it.dart' as _i241;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -42,28 +43,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => registerModule.prefs,
       preResolve: true,
     );
-    gh.singleton<_i361.Dio>(() => registerModule.dio);
+    gh.factory<_i769.CustomInterceptors>(() => _i769.CustomInterceptors());
     gh.singleton<_i790.SwitchLayoutBloc>(() => _i790.SwitchLayoutBloc());
-    gh.factory<_i782.FoodEntity>(() => _i782.FoodEntity(
-          id: gh<int>(),
-          name: gh<String>(),
-          image: gh<String>(),
-          isDeleted: gh<bool>(),
-          ingredients: gh<List<String>>(),
-          instructions: gh<List<String>>(),
-          prepTimeMinutes: gh<int>(),
-          cookTimeMinutes: gh<int>(),
-          servings: gh<int>(),
-          difficulty: gh<String>(),
-          cuisine: gh<String>(),
-          caloriesPerServing: gh<int>(),
-          tags: gh<List<String>>(),
-          userId: gh<int>(),
-          rating: gh<double>(),
-          reviewCount: gh<int>(),
-          mealTypes: gh<List<String>>(),
-          deletedOn: gh<DateTime>(),
-        ));
+    gh.singleton<_i361.Dio>(
+        () => registerModule.dio(gh<_i503.CustomInterceptors>()));
     gh.singleton<_i82.FoodRestApi>(
         () => registerModule.foodRestApi(gh<_i361.Dio>()));
     gh.factory<_i909.FoodRepository>(

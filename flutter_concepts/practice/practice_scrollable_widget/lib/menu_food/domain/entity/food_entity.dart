@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
-@injectable
 class FoodEntity extends Equatable {
   const FoodEntity({
     required this.id,
