@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:practice_scrollable_widget/l10n/arb/app_localizations.dart';
-import 'package:practice_scrollable_widget/menu_food/presentation/food_presentation.dart';
 
 class App extends StatelessWidget {
-  const App({super.key});
-
+  const App({required this.router, super.key});
+  final GoRouter router;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
         useMaterial3: true,
       ),
+      routerConfig: router,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const MenuFoodPage(),
+      builder: (context, router) {
+        return SafeArea(
+          child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            body: router,
+          ),
+        );
+      },
     );
   }
 }

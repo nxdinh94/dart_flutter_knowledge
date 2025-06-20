@@ -51,6 +51,7 @@ class FoodRepositoryImp extends FoodRepository{
         return DataSuccess<List<FoodEntity>>(foodEntities);
       }
       else {
+
         return DataError(
           DioException(
             requestOptions: result.response.requestOptions,
@@ -60,6 +61,7 @@ class FoodRepositoryImp extends FoodRepository{
         );
       }
     } on DioException catch (e) {
+      print(e);
       return DataError(
         DioException(
           response: e.response,

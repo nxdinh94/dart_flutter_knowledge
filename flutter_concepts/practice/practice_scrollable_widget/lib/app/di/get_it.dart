@@ -30,6 +30,4 @@ abstract class RegisterModule {
 
   @singleton
   FoodRestApi foodRestApi(Dio dio) => FoodRestApi(dio);
-
-
 }
