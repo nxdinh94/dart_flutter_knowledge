@@ -1,19 +1,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+class ErrorRoute extends StatelessWidget {
+  const ErrorRoute({
+    required this.state, super.key,
+  });
 
-class School extends StatelessWidget {
-  const School({super.key});
+  final GoRouterState state;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: TextButton(
-        onPressed: () {
-          context.push('/schoolHome');
-        },
+    return Scaffold(
+      body: Center(
         child: Text(
-          'Let browse our classes',
+          'Error: ${state.error}',
           style: Theme.of(context).textTheme.headlineMedium,
         ),
       ),

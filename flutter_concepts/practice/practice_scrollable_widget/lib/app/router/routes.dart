@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:practice_scrollable_widget/app/app.dart';
-import 'package:practice_scrollable_widget/app/router/my_bottom_navigation_bar.dart';
+import 'package:practice_scrollable_widget/core/core.dart';
 
 class CustomNavigationHelper {
   factory CustomNavigationHelper(String initialRoute) {
@@ -16,15 +16,16 @@ class CustomNavigationHelper {
       GlobalKey<NavigatorState>();
   static final GlobalKey<NavigatorState> homeTabNavigatorKey =
       GlobalKey<NavigatorState>();
-  static final GlobalKey<NavigatorState> walletTabNavigatorKey =
+    static final GlobalKey<NavigatorState> businessTabNavigatorKey =
       GlobalKey<NavigatorState>();
-  static final GlobalKey<NavigatorState> addingWorkspaceTabNavigatorKey =
+  static final GlobalKey<NavigatorState> schoolTabNavigatorKey =
       GlobalKey<NavigatorState>();
-  static final GlobalKey<NavigatorState> budgetsTabNavigatorKey =
+
+  static final GlobalKey<NavigatorState> schoolHomeTabNavigatorKey =
       GlobalKey<NavigatorState>();
-  static final GlobalKey<NavigatorState> accountTabNavigatorKey =
+  static final GlobalKey<NavigatorState> schoolClassesTabNavigatorKey =
       GlobalKey<NavigatorState>();
-  static final GlobalKey<NavigatorState> authTabNavigatorKey =
+  static final GlobalKey<NavigatorState> schoolFlightClassesTabNavigatorKey =
       GlobalKey<NavigatorState>();
 
   BuildContext get context =>
@@ -56,27 +57,27 @@ class CustomNavigationHelper {
                 },
                 routes: <RouteBase>[]
               ),
-
             ],
           ),
           StatefulShellBranch(
-              navigatorKey: walletTabNavigatorKey,
-              routes: [
-                GoRoute(
-                  path: '/business',
-                  pageBuilder: (context, GoRouterState state) {
-                    return getPage(
-                      child: const Business(),
-                      state: state
-                    );
-                  },
-                  routes:  [
+            navigatorKey: businessTabNavigatorKey,
+            routes: [
+              GoRoute(
+                path: '/business',
+                pageBuilder: (context, GoRouterState state) {
+                  return getPage(
+                    child: const Business(),
+                    state: state,
+                  );
+                },
+                routes:  [
 
-                  ]
-                )
-              ]),
+                ],
+              ),
+            ],
+          ),
           StatefulShellBranch(
-              navigatorKey: addingWorkspaceTabNavigatorKey,
+              navigatorKey: schoolTabNavigatorKey,
               routes: [
                 GoRoute(
                   path: '/school',
@@ -90,12 +91,74 @@ class CustomNavigationHelper {
 
                   ]),
               ]),
+        ],
+        pageBuilder: (BuildContext context, GoRouterState state,
+            StatefulNavigationShell navigationShell,) {
+          return getPage(
+            child: MyBottomNavigationBar(
+              child: navigationShell,
+            ),
+            state: state,
+          );
+        },
+      ),
+      // This is the route for the school tab
+      StatefulShellRoute.indexedStack(
+        parentNavigatorKey: parentNavigatorKey,
+        branches: [
+          StatefulShellBranch(
+            navigatorKey: schoolHomeTabNavigatorKey,
+            routes: [
+              GoRoute(
+                path: '/schoolHome',
+                pageBuilder: (context, GoRouterState state) {
+                  return getPage(
+                    child: const SchoolHome(),
+                    state: state,
+                  );
+                },
+                routes: <RouteBase>[
 
+                ]
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+              navigatorKey: schoolClassesTabNavigatorKey,
+              routes: [
+                GoRoute(
+                  path: '/schoolClasses',
+                  pageBuilder: (context, GoRouterState state) {
+                    return getPage(
+                      child: const Classes(),
+                      state: state
+                    );
+                  },
+                  routes:  [
+
+                  ]
+                )
+              ]),
+          StatefulShellBranch(
+              navigatorKey: schoolFlightClassesTabNavigatorKey,
+              routes: [
+                GoRoute(
+                  path: '/schoolFlightClasses',
+                  pageBuilder: (context, GoRouterState state) {
+                    return getPage(
+                      child: const FlightClasses(),
+                      state: state
+                    );
+                  },
+                  routes: [
+
+                  ]),
+              ]),
         ],
         pageBuilder: (BuildContext context, GoRouterState state,
             StatefulNavigationShell navigationShell) {
           return getPage(
-            child: MyBottomNavigationBar(
+            child: SchoolBottomNavigationBar(
               child: navigationShell
             ),
             state: state,
@@ -109,6 +172,9 @@ class CustomNavigationHelper {
       navigatorKey: parentNavigatorKey,
       initialLocation: initialRoute,
       routes: routes,
+      errorBuilder: (context, state) {
+        return ErrorRoute(state: state);
+      },
     );
     return this;
   }
@@ -131,3 +197,5 @@ class CustomNavigationHelper {
     );
   }
 }
+
+

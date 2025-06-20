@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class MyBottomNavigationBar extends StatefulWidget {
-  const MyBottomNavigationBar({
+class SchoolBottomNavigationBar extends StatefulWidget {
+  const SchoolBottomNavigationBar({
     required this.child, super.key,
   });
 
   final StatefulNavigationShell child;
 
   @override
-  State<MyBottomNavigationBar> createState() => _MyBottomNavigationBarState();
+  State<SchoolBottomNavigationBar> createState() => _SchoolBottomNavigationBarState();
 }
 
-class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
-  int count  = 0;
+class _SchoolBottomNavigationBarState extends State<SchoolBottomNavigationBar> {
+  int count = 0;
   bool isInAddingTab = false;
   @override
   Widget build(BuildContext context) {
@@ -35,20 +35,19 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         ),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            key: ValueKey('homeTabButton'),
             icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business, size: 24),
-            label: 'Business',
+            icon: Icon(Icons.class_outlined, size: 24),
+            label: 'Classes',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.school,
+              Icons.flight_class,
               size: 28,
             ),
-            label: 'School',
+            label: 'Flight Classes',
           ),
         ],
       ),

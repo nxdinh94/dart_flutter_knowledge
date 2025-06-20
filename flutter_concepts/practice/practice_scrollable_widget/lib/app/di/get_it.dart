@@ -30,4 +30,12 @@ abstract class RegisterModule {
 
   @singleton
   FoodRestApi foodRestApi(Dio dio) => FoodRestApi(dio);
+  @singleton
+  CustomNavigationHelper customNavigationHelper(){
+    var initialRoute = '/';
+    const isAuthenticated = false;
+    isAuthenticated ? initialRoute = '/schoolHome' : initialRoute = '/';
+    final customNavigationHelper = CustomNavigationHelper(initialRoute);
+    return customNavigationHelper;
+  }
 }

@@ -1,6 +1,13 @@
 export 'di/get_it.dart';
 export 'interceptor/interceptor.dart';
+export 'router/my_bottom_navigation_bar.dart';
+export 'router/routes.dart';
+export 'router/school_bottom_navigation_bar.dart';
+export 'theme/theme.dart';
 export 'view/app.dart';
 export 'view/business/business.dart';
 export 'view/home/home.dart';
 export 'view/school/school.dart';
+export 'view/school/school_browse/classes.dart';
+export 'view/school/school_browse/flight_classes.dart';
+export 'view/school/school_browse/home.dart';

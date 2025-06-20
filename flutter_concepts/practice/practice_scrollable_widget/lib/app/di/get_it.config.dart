@@ -25,6 +25,7 @@ import '../../menu_food/presentation/bloc/switch_layout/switch_layout_bloc.dart'
     as _i790;
 import '../app.dart' as _i503;
 import '../interceptor/interceptor.dart' as _i769;
+import '../router/routes.dart' as _i534;
 import 'get_it.dart' as _i241;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -44,6 +45,8 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.factory<_i769.CustomInterceptors>(() => _i769.CustomInterceptors());
+    gh.singleton<_i534.CustomNavigationHelper>(
+        () => registerModule.customNavigationHelper());
     gh.singleton<_i790.SwitchLayoutBloc>(() => _i790.SwitchLayoutBloc());
     gh.singleton<_i361.Dio>(
         () => registerModule.dio(gh<_i503.CustomInterceptors>()));
