@@ -36,7 +36,7 @@ class CustomNavigationHelper {
   GoRouteInformationParser get routeInformationParser =>
       router.routeInformationParser;
   static final CustomNavigationHelper _instance =
-      CustomNavigationHelper._internal(); //instance of CustomNavigatorHelper
+      CustomNavigationHelper._internal(); //instance of Cust  omNavigatorHelper
   static CustomNavigationHelper get instance => _instance;
 
   CustomNavigationHelper _initialize(String initialRoute) {
