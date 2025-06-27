@@ -14,18 +14,22 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
+import '../../menu_food/data/data_source/local/local_food_data_source.dart'
+    as _i616;
 import '../../menu_food/data/food_data.dart' as _i82;
 import '../../menu_food/data/repository/food_repository_imp.dart' as _i84;
 import '../../menu_food/domain/food_domain.dart' as _i909;
 import '../../menu_food/domain/useCase/delete_food_use_case.dart' as _i920;
 import '../../menu_food/domain/useCase/get_all_food_use_case.dart' as _i42;
-import '../../menu_food/presentation/bloc/menu_food/menu_food_bloc.dart'
-    as _i50;
+import '../../menu_food/domain/useCase/get_local_foods_use_case.dart' as _i968;
+import '../../menu_food/presentation/bloc/menu_food/local/local_food_bloc.dart'
+    as _i393;
+import '../../menu_food/presentation/bloc/menu_food/remote/menu_food_bloc.dart'
+    as _i863;
 import '../../menu_food/presentation/bloc/switch_layout/switch_layout_bloc.dart'
     as _i790;
 import '../app.dart' as _i503;
 import '../interceptor/interceptor.dart' as _i769;
-import '../router/routes.dart' as _i534;
 import 'get_it.dart' as _i241;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -45,20 +49,26 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.factory<_i769.CustomInterceptors>(() => _i769.CustomInterceptors());
-    gh.singleton<_i534.CustomNavigationHelper>(
+    gh.factory<_i616.LocalFoodDataSource>(() => _i616.LocalFoodDataSource());
+    gh.singleton<_i503.CustomNavigationHelper>(
         () => registerModule.customNavigationHelper());
+    gh.singleton<_i393.LocalFoodBloc>(() => _i393.LocalFoodBloc());
     gh.singleton<_i790.SwitchLayoutBloc>(() => _i790.SwitchLayoutBloc());
+    gh.factory<_i968.GetLocalFoodUseCase>(() => _i968.GetLocalFoodUseCase(
+        foodRepositoryImp: gh<_i82.FoodRepositoryImp>()));
     gh.singleton<_i361.Dio>(
         () => registerModule.dio(gh<_i503.CustomInterceptors>()));
     gh.singleton<_i82.FoodRestApi>(
         () => registerModule.foodRestApi(gh<_i361.Dio>()));
-    gh.factory<_i909.FoodRepository>(
-        () => _i84.FoodRepositoryImp(gh<_i82.FoodRestApi>()));
+    gh.factory<_i909.FoodRepository>(() => _i84.FoodRepositoryImp(
+          gh<_i82.FoodRestApi>(),
+          gh<_i82.LocalFoodDataSource>(),
+        ));
     gh.factory<_i920.DeleteFoodUseCase>(
         () => _i920.DeleteFoodUseCase(gh<_i909.FoodRepository>()));
     gh.factory<_i42.GetAllFoodUseCase>(
         () => _i42.GetAllFoodUseCase(gh<_i909.FoodRepository>()));
-    gh.singleton<_i50.MenuFoodBloc>(() => _i50.MenuFoodBloc(
+    gh.singleton<_i863.MenuFoodBloc>(() => _i863.MenuFoodBloc(
           gh<_i909.GetAllFoodUseCase>(),
           gh<_i909.DeleteFoodUseCase>(),
         ));

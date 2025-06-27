@@ -14,13 +14,19 @@ class _MenuFoodPageState extends State<MenuFoodPage> {
   late bool isGrid;
   @override
   Widget build(BuildContext context) {
-
     isGrid = context.select<SwitchLayoutBloc, bool>((bloc) => bloc.state);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Menu Food'),
         actions: [
+          // Navigate to saved food
+          IconButton(
+            onPressed: () {
+
+            },
+            icon: const Icon(Icons.save, size: 30, color: Colors.white,),
+          ),
+          const SizedBox(width: 12,),
           Switch(
             value: isGrid,
             activeColor: Colors.red,

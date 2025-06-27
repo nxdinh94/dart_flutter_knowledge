@@ -6,7 +6,8 @@ import 'package:practice_scrollable_widget/menu_food/presentation/food_presentat
 
 @singleton
 class MenuFoodBloc extends Bloc<MenuFoodEvent, MenuFoodState> {
-  MenuFoodBloc(this.getAllFoodUseCase, this.deleteFoodUseCase) : super(const MenuFoodLoading()) {
+  MenuFoodBloc(this.getAllFoodUseCase, this.deleteFoodUseCase)
+    : super(const MenuFoodLoading()) {
     on<MenuFoodGetAllEvent>(_onMenuFoodGetAllEvent);
     on<MenuFoodDeleteEvent>(_onMenuFoodDeleteEvent);
   }

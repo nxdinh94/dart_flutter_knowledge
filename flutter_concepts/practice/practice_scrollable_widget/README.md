@@ -1,4 +1,6 @@
 
+
+dart run build_runner watch -d
 ```markdown
 # Food Menu App
 

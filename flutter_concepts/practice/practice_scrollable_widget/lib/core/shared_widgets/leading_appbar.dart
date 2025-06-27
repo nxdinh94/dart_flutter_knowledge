@@ -9,7 +9,7 @@ class LeadingAppbar extends StatelessWidget {
     return GoRouter.of(context).canPop() ? GestureDetector(
         onTap: () => context.pop(),
         child: const SizedBox(
-          child: Icon(Icons.arrow_back_ios_new_rounded, size: 22,),
+          child: Icon(Icons.arrow_back_ios_new_rounded, size: 22, color: Colors.white,),
         ),
       ) : const SizedBox();
   }

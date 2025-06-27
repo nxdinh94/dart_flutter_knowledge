@@ -6,6 +6,7 @@ import 'package:practice_scrollable_widget/menu_food/presentation/food_presentat
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+
   await configureDependencies();
   await bootstrap((){
     return MultiBlocProvider(

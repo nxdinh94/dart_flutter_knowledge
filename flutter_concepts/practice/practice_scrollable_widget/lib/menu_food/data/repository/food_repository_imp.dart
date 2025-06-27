@@ -8,17 +8,19 @@ import 'package:practice_scrollable_widget/menu_food/domain/food_domain.dart';
 
 @Injectable(as: FoodRepository)
 class FoodRepositoryImp extends FoodRepository{
-  FoodRepositoryImp(this.foodRestApi);
+  FoodRepositoryImp(this.foodRestApi, this.localFoodDataSource);
   final FoodRestApi foodRestApi;
+  final LocalFoodDataSource localFoodDataSource;
 
   @override
   Future<DataState<FoodEntity>> deleteFood(String id) async {
     try {
       final rawData = await foodRestApi.deleteFood(id);
-      if(rawData.response.statusCode == HttpStatus.ok){
+      if (rawData.response.statusCode == HttpStatus.ok) {
         final foodEntity = rawData.data.toEntity();
         return DataSuccess(foodEntity);
-      }else {
+      }
+      else {
         return DataError(
           DioException(
             requestOptions: rawData.response.requestOptions,
@@ -27,7 +29,8 @@ class FoodRepositoryImp extends FoodRepository{
           ),
         );
       }
-    } on DioException catch (e) {
+    }
+    on DioException catch (e) {
       return DataError(
         DioException(
           response: e.response,
@@ -51,7 +54,6 @@ class FoodRepositoryImp extends FoodRepository{
         return DataSuccess<List<FoodEntity>>(foodEntities);
       }
       else {
-
         return DataError(
           DioException(
             requestOptions: result.response.requestOptions,
@@ -60,8 +62,8 @@ class FoodRepositoryImp extends FoodRepository{
           ),
         );
       }
-    } on DioException catch (e) {
-      print(e);
+    }
+    on DioException catch (e) {
       return DataError(
         DioException(
           response: e.response,
@@ -70,4 +72,10 @@ class FoodRepositoryImp extends FoodRepository{
       );
     }
   }
+
+  // @override
+  // Future<List<FoodEntity>> getLocalFoods() async {
+  //   List<FoodEntity> food = [];
+  //  return food;
+  // }
 }

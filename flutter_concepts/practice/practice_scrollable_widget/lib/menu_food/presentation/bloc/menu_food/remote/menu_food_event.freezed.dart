@@ -139,4 +139,69 @@ class _$MenuFoodDeleteEventCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
+
+class SaveToFavorite implements MenuFoodEvent {
+  const SaveToFavorite(this.foodEntity);
+
+  final FoodEntity foodEntity;
+
+  /// Create a copy of MenuFoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $SaveToFavoriteCopyWith<SaveToFavorite> get copyWith =>
+      _$SaveToFavoriteCopyWithImpl<SaveToFavorite>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SaveToFavorite &&
+            (identical(other.foodEntity, foodEntity) ||
+                other.foodEntity == foodEntity));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, foodEntity);
+
+  @override
+  String toString() {
+    return 'MenuFoodEvent.saveToFavorite(foodEntity: $foodEntity)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $SaveToFavoriteCopyWith<$Res>
+    implements $MenuFoodEventCopyWith<$Res> {
+  factory $SaveToFavoriteCopyWith(
+          SaveToFavorite value, $Res Function(SaveToFavorite) _then) =
+      _$SaveToFavoriteCopyWithImpl;
+  @useResult
+  $Res call({FoodEntity foodEntity});
+}
+
+/// @nodoc
+class _$SaveToFavoriteCopyWithImpl<$Res>
+    implements $SaveToFavoriteCopyWith<$Res> {
+  _$SaveToFavoriteCopyWithImpl(this._self, this._then);
+
+  final SaveToFavorite _self;
+  final $Res Function(SaveToFavorite) _then;
+
+  /// Create a copy of MenuFoodEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? foodEntity = null,
+  }) {
+    return _then(SaveToFavorite(
+      null == foodEntity
+          ? _self.foodEntity
+          : foodEntity // ignore: cast_nullable_to_non_nullable
+              as FoodEntity,
+    ));
+  }
+}
+
 // dart format on
