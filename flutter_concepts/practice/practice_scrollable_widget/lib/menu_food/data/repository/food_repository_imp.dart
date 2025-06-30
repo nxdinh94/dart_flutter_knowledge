@@ -72,10 +72,4 @@ class FoodRepositoryImp extends FoodRepository{
       );
     }
   }
-
-  // @override
-  // Future<List<FoodEntity>> getLocalFoods() async {
-  //   List<FoodEntity> food = [];
-  //  return food;
-  // }
 }

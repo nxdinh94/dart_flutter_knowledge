@@ -57,15 +57,35 @@ class LocalFoodLoading implements LocalFoodState {
 
 /// @nodoc
 
-class LocalFoodLoadSuccess implements LocalFoodState {
-  const LocalFoodLoadSuccess(final List<FoodEntity> menuFoods)
-      : _menuFoods = menuFoods;
+class LocalFoodInitial implements LocalFoodState {
+  const LocalFoodInitial();
 
-  final List<FoodEntity> _menuFoods;
-  List<FoodEntity> get menuFoods {
-    if (_menuFoods is EqualUnmodifiableListView) return _menuFoods;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is LocalFoodInitial);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'LocalFoodState.initial()';
+  }
+}
+
+/// @nodoc
+
+class LocalFoodLoadSuccess implements LocalFoodState {
+  const LocalFoodLoadSuccess(final List<FoodEntity> localFoods)
+      : _localFoods = localFoods;
+
+  final List<FoodEntity> _localFoods;
+  List<FoodEntity> get localFoods {
+    if (_localFoods is EqualUnmodifiableListView) return _localFoods;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_menuFoods);
+    return EqualUnmodifiableListView(_localFoods);
   }
 
   /// Create a copy of LocalFoodState
@@ -82,16 +102,16 @@ class LocalFoodLoadSuccess implements LocalFoodState {
         (other.runtimeType == runtimeType &&
             other is LocalFoodLoadSuccess &&
             const DeepCollectionEquality()
-                .equals(other._menuFoods, _menuFoods));
+                .equals(other._localFoods, _localFoods));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_menuFoods));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_localFoods));
 
   @override
   String toString() {
-    return 'LocalFoodState.loadSuccess(menuFoods: $menuFoods)';
+    return 'LocalFoodState.loadSuccess(localFoods: $localFoods)';
   }
 }
 
@@ -102,7 +122,7 @@ abstract mixin class $LocalFoodLoadSuccessCopyWith<$Res>
           $Res Function(LocalFoodLoadSuccess) _then) =
       _$LocalFoodLoadSuccessCopyWithImpl;
   @useResult
-  $Res call({List<FoodEntity> menuFoods});
+  $Res call({List<FoodEntity> localFoods});
 }
 
 /// @nodoc
@@ -117,12 +137,12 @@ class _$LocalFoodLoadSuccessCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? menuFoods = null,
+    Object? localFoods = null,
   }) {
     return _then(LocalFoodLoadSuccess(
-      null == menuFoods
-          ? _self._menuFoods
-          : menuFoods // ignore: cast_nullable_to_non_nullable
+      null == localFoods
+          ? _self._localFoods
+          : localFoods // ignore: cast_nullable_to_non_nullable
               as List<FoodEntity>,
     ));
   }
@@ -131,14 +151,14 @@ class _$LocalFoodLoadSuccessCopyWithImpl<$Res>
 /// @nodoc
 
 class LocalFoodDeleteSuccess implements LocalFoodState {
-  const LocalFoodDeleteSuccess(final List<FoodEntity> menuFoods)
-      : _menuFoods = menuFoods;
+  const LocalFoodDeleteSuccess(final List<FoodEntity> localFoods)
+      : _localFoods = localFoods;
 
-  final List<FoodEntity> _menuFoods;
-  List<FoodEntity> get menuFoods {
-    if (_menuFoods is EqualUnmodifiableListView) return _menuFoods;
+  final List<FoodEntity> _localFoods;
+  List<FoodEntity> get localFoods {
+    if (_localFoods is EqualUnmodifiableListView) return _localFoods;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_menuFoods);
+    return EqualUnmodifiableListView(_localFoods);
   }
 
   /// Create a copy of LocalFoodState
@@ -155,16 +175,16 @@ class LocalFoodDeleteSuccess implements LocalFoodState {
         (other.runtimeType == runtimeType &&
             other is LocalFoodDeleteSuccess &&
             const DeepCollectionEquality()
-                .equals(other._menuFoods, _menuFoods));
+                .equals(other._localFoods, _localFoods));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_menuFoods));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_localFoods));
 
   @override
   String toString() {
-    return 'LocalFoodState.deleteSuccess(menuFoods: $menuFoods)';
+    return 'LocalFoodState.deleteSuccess(localFoods: $localFoods)';
   }
 }
 
@@ -175,7 +195,7 @@ abstract mixin class $LocalFoodDeleteSuccessCopyWith<$Res>
           $Res Function(LocalFoodDeleteSuccess) _then) =
       _$LocalFoodDeleteSuccessCopyWithImpl;
   @useResult
-  $Res call({List<FoodEntity> menuFoods});
+  $Res call({List<FoodEntity> localFoods});
 }
 
 /// @nodoc
@@ -190,12 +210,12 @@ class _$LocalFoodDeleteSuccessCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? menuFoods = null,
+    Object? localFoods = null,
   }) {
     return _then(LocalFoodDeleteSuccess(
-      null == menuFoods
-          ? _self._menuFoods
-          : menuFoods // ignore: cast_nullable_to_non_nullable
+      null == localFoods
+          ? _self._localFoods
+          : localFoods // ignore: cast_nullable_to_non_nullable
               as List<FoodEntity>,
     ));
   }

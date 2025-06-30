@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
+import 'package:practice_scrollable_widget/menu_food/data/food_data.dart';
 
 class FoodEntity extends Equatable {
   const FoodEntity({
@@ -62,4 +63,29 @@ class FoodEntity extends Equatable {
     isDeleted,
     deletedOn,
   ];
+}
+
+extension FoodModelMapper on FoodEntity {
+  FoodModel toModel() {
+    return FoodModel(
+      id: id,
+      name: name,
+      image: image,
+      isDeleted: isDeleted,
+      ingredients: ingredients,
+      instructions: instructions,
+      prepTimeMinutes: prepTimeMinutes,
+      cookTimeMinutes: cookTimeMinutes,
+      servings: servings,
+      difficulty: difficulty,
+      cuisine: cuisine,
+      caloriesPerServing: caloriesPerServing,
+      tags: tags,
+      userId: userId,
+      rating: rating,
+      reviewCount: reviewCount,
+      mealTypes: mealTypes,
+      deletedOn: deletedOn,
+    );
+  }
 }

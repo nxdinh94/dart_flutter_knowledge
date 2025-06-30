@@ -9,10 +9,12 @@ part 'local_food_state.freezed.dart';
 class LocalFoodState with _$LocalFoodState {
   const factory LocalFoodState.loading() = LocalFoodLoading;
 
-  const factory LocalFoodState.loadSuccess(List<FoodEntity> menuFoods) =
+  const factory LocalFoodState.initial() =
+  LocalFoodInitial;
+  const factory LocalFoodState.loadSuccess(List<FoodEntity> localFoods) =
   LocalFoodLoadSuccess;
 
-  const factory LocalFoodState.deleteSuccess(List<FoodEntity> menuFoods) =
+  const factory LocalFoodState.deleteSuccess(List<FoodEntity> localFoods) =
   LocalFoodDeleteSuccess;
 
   const factory LocalFoodState.loadFailure(DioException error) =

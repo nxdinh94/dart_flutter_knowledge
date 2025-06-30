@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:practice_scrollable_widget/core/core.dart';
 import 'package:practice_scrollable_widget/menu_food/domain/food_domain.dart';
+import 'package:practice_scrollable_widget/menu_food/presentation/food_presentation.dart';
 
 class FoodDetailPage extends StatelessWidget {
 
@@ -13,6 +15,15 @@ class FoodDetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(foodEntity.name),
         leading: const LeadingAppbar(),
+        actions: [
+          // Navigate to saved food
+          IconButton(
+            onPressed: () {
+              context.read<LocalFoodBloc>().add(SaveFavoriteFoodEvent(foodEntity));
+            },
+            icon: const Icon(Icons.save, size: 30, color: Colors.white,),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),

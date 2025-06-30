@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:practice_scrollable_widget/app/app.dart';
 import 'package:practice_scrollable_widget/core/core.dart';
+import 'package:practice_scrollable_widget/menu_food/presentation/view/favorite_food_page.dart';
 
 class CustomNavigationHelper {
   factory CustomNavigationHelper(String initialRoute) {
@@ -55,7 +56,20 @@ class CustomNavigationHelper {
                     state: state,
                   );
                 },
-                routes: <RouteBase>[]
+                routes: <RouteBase>[
+                  GoRoute(
+                      path: 'favorites',
+                      pageBuilder: (context, GoRouterState state) {
+                        return getPage(
+                          child: const FavoriteFoodPage(),
+                          state: state,
+                        );
+                      },
+                      routes: <RouteBase>[
+
+                      ]
+                  ),
+                ]
               ),
             ],
           ),

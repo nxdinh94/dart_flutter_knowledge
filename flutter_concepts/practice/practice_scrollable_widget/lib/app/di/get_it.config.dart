@@ -21,7 +21,6 @@ import '../../menu_food/data/repository/food_repository_imp.dart' as _i84;
 import '../../menu_food/domain/food_domain.dart' as _i909;
 import '../../menu_food/domain/useCase/delete_food_use_case.dart' as _i920;
 import '../../menu_food/domain/useCase/get_all_food_use_case.dart' as _i42;
-import '../../menu_food/domain/useCase/get_local_foods_use_case.dart' as _i968;
 import '../../menu_food/presentation/bloc/menu_food/local/local_food_bloc.dart'
     as _i393;
 import '../../menu_food/presentation/bloc/menu_food/remote/menu_food_bloc.dart'
@@ -54,8 +53,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => registerModule.customNavigationHelper());
     gh.singleton<_i393.LocalFoodBloc>(() => _i393.LocalFoodBloc());
     gh.singleton<_i790.SwitchLayoutBloc>(() => _i790.SwitchLayoutBloc());
-    gh.factory<_i968.GetLocalFoodUseCase>(() => _i968.GetLocalFoodUseCase(
-        foodRepositoryImp: gh<_i82.FoodRepositoryImp>()));
     gh.singleton<_i361.Dio>(
         () => registerModule.dio(gh<_i503.CustomInterceptors>()));
     gh.singleton<_i82.FoodRestApi>(

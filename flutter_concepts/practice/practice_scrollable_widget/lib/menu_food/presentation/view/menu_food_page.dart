@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:practice_scrollable_widget/menu_food/domain/food_domain.dart';
 import 'package:practice_scrollable_widget/menu_food/presentation/food_presentation.dart';
 class MenuFoodPage extends StatefulWidget {
@@ -22,7 +23,7 @@ class _MenuFoodPageState extends State<MenuFoodPage> {
           // Navigate to saved food
           IconButton(
             onPressed: () {
-
+              context.push('/favorites');
             },
             icon: const Icon(Icons.save, size: 30, color: Colors.white,),
           ),
